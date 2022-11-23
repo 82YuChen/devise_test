@@ -1,0 +1,18 @@
+<h1>首頁 </h1>
+<%# <p>Find me in app/views/pages/home.html.erb</p> %>
+
+
+<% if current_user %>
+    <div><p>Hello,<%= current_user.email %></p></div>
+    <div>妳是<%= current_user.role %></div>
+    <% if current_user.admin? %>
+        現在有<%= User.count %>個使用者在系統
+    <% end %>
+    <p>你已經登入</p>
+    <%= link_to "登出", destroy_user_session_path, method: :delete %>
+<% else%>
+    <p>你還沒有登入</p>
+    <%= link_to "註冊", new_user_registration_path %>
+    <br />
+    <%= link_to "登入", new_user_session_path %>
+<% end %>
